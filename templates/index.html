@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DLS Converter</title>
+<style>
+body{
+background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+font-family:Segoe UI;color:white;
+display:flex;justify-content:center;align-items:center;height:100vh
+}
+.card{
+background:rgba(255,255,255,.1);
+padding:30px;border-radius:15px;width:400px;text-align:center
+}
+input,button{width:100%;padding:10px;margin:10px 0;border-radius:8px;border:none}
+button{background:#2c98f0;color:white;font-weight:bold}
+.progress{height:10px;background:#333;border-radius:10px}
+.bar{height:10px;width:0%;background:#4caf50;border-radius:10px}
+a{color:#0ff}
+</style>
+</head>
+
+<body>
+<div class="card">
+<h2>DLS Batch Converter</h2>
+
+<form method="post" enctype="multipart/form-data" onsubmit="upload()">
+<input type="file" name="folder" webkitdirectory multiple required>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<button>Convert</button>
+</form>
+
+{% for f in files %}
+<a href="/download/{{f}}">{{f}}</a><br>
+{% endfor %}
+
+</div>
+
+<script>
+function upload(){
+let bar=document.getElementById("bar");
+let i=0;
+let x=setInterval(()=>{
+i+=5;
+bar.style.width=i+"%";
+if(i>=100)clearInterval(x);
+},100);
+}
+</script>
+
+</body>
+</html>
